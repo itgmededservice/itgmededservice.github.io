@@ -1,0 +1,202 @@
+#!/usr/bin/env python3
+import subprocess
+import pyinotify
+from datetime import datetime
+import asyncio
+import os
+import sys
+import argparse
+
+
+class StateFile:
+    def __init__(self, filename, reset=None):
+        self.filename = filename
+
+    @property
+    def state(self):
+        value = os.path.exists(self.filename)
+        return value
+
+    @state.setter
+    def state(self, value):
+        if value:
+            with open(self.filename, "w"):
+                pass
+        elif os.path.exists(self.filename):
+            os.remove(self.filename)
+        return value
+
+
+WATCHING = StateFile(".git/autocommit-watching")
+COMMITTING = StateFile(".git/autocommit-committing")
+MERGING = StateFile(".git/autocommit-merging")
+
+
+def summary():
+    from collections import defaultdict
+    status = subprocess.check_output(['git', 'status', '--porcelain'])
+    grouped = defaultdict(set)
+    for line in status.decode('utf-8').strip().split('\n'):
+        status, name = line.split(' ', 1)
+        name = name.strip()
+        grouped[status].add(name)
+    return ",  ".join("{}: {}".format(status, " ".join(sorted(names))) for status, names in sorted(grouped.items()))
+
+
+
+class Watcher(pyinotify.ProcessEvent):
+    EVENT_MASK = pyinotify.IN_CREATE | pyinotify.IN_DELETE | pyinotify.IN_MODIFY | pyinotify.IN_MOVED_FROM | pyinotify.IN_MOVED_TO
+
+    def __init__(self, branch='autocommit'):
+        self.branch = branch
+        self.loop = asyncio.get_event_loop()
+        self.cwd = os.path.realpath(os.curdir)
+
+    def shorten_pathname(self, pathname):
+        if pathname.startswith(self.cwd):
+            pathname = pathname[len(self.cwd):]
+            if pathname.startswith('/'):
+                pathname = pathname[1:]
+        return pathname
+
+    def process_IN_CREATE(self, event):
+        self.process(event)
+
+    def process_IN_DELETE(self, event):
+        self.process(event)
+
+    def process_IN_MODIFY(self, event):
+        self.process(event)
+
+    def process_IN_MOVED_FROM(self, event):
+        self.process(event)
+
+    def process_IN_MOVED_TO(self, event):
+        self.process(event)
+
+    def process(self, event):
+        pathname = self.shorten_pathname(event.pathname)
+        if pathname.startswith('.git/'):
+            return
+        self.commit_later()
+
+    def commit_later(self):
+        if not COMMITTING.state:
+            COMMITTING.state = True
+            self.loop.call_later(1, self.commit)
+
+    def commit(self):
+        if MERGING.state:
+            self.loop.call_later(1, self.commit)
+        else:
+            try:
+                subprocess.check_call(['git', 'checkout', self.branch], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError:
+                subprocess.check_call(['git', 'checkout', '-b', self.branch]) 
+            subprocess.check_call(['git', 'add', '-A', '.'])
+            if subprocess.check_output(['git', 'status', '--porcelain']):
+                subprocess.check_call(['git', 'status', '--short'])
+                message = "[autocommit] {}".format(summary())
+                subprocess.check_call(['git', 'commit', '-m', message])
+                print('')
+            COMMITTING.state = False
+
+    def exclude_filter(self, path):
+        """Exclude repository metadata from inotify watches."""
+        assert(path.startswith(self.cwd))
+        relative = path[len(self.cwd):]
+        return relative == '/.git' or relative.startswith('/.git/')
+
+    def run(self):
+        if not os.path.exists('.git'):
+            raise Exception("Should be called in root of repository.")
+
+        self.commit()
+
+        wm = pyinotify.WatchManager()
+        notifier = pyinotify.AsyncioNotifier(wm, self.loop, default_proc_fun=self)
+        wm.add_watch(self.cwd, self.EVENT_MASK, rec=True, auto_add=True, exclude_filter=self.exclude_filter)
+
+        try:
+            self.loop.run_forever()
+        except KeyboardInterrupt:
+            pass
+
+
+def watch(args):
+    if WATCHING.state:
+        raise Exception("A watch process is already running")
+    WATCHING.state = True
+    try:
+        Watcher(branch=args.watch_branch).run()
+    finally:
+        WATCHING.state = False
+        COMMITTING.state = False
+
+
+def merge(args):
+    import time
+    while COMMITTING.state:
+        time.sleep(0.1)
+    MERGING.state = True
+    try:
+        subprocess.check_call(['git', 'checkout', args.branch])
+        if args.message:
+            subprocess.check_call(['git', 'merge', '--no-ff', '-m', args.message, args.watch_branch])
+        else:
+            subprocess.check_call(['git', 'merge', '--no-ff', args.watch_branch])
+    finally:
+        MERGING.state = False
+
+
+
+def set_default_subparser(parser, name, args=None):
+    """default subparser selection. Call after setup, just before parse_args()
+    name: is the name of the subparser to call by default
+    args: if set is the argument list handed to parse_args()
+
+    , tested with 2.7, 3.2, 3.3, 3.4
+    it works with 2.6 assuming argparse is installed
+    """
+    subparser_found = False
+    for arg in sys.argv[1:]:
+        if arg in ['-h', '--help']:  # global help if no subparser
+            break
+    else:
+        for x in parser._subparsers._actions:
+            if not isinstance(x, argparse._SubParsersAction):
+                continue
+            for sp_name in x._name_parser_map.keys():
+                if sp_name in sys.argv[1:]:
+                    subparser_found = True
+        if not subparser_found:
+            # insert default in first position, this implies no
+            # global options without a sub_parsers specified
+            if args is None:
+                sys.argv.insert(1, name)
+            else:
+                args.insert(0, name)
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-w", "--watch-branch", type=str, default='autocommit',
+                        help="automatically commit to this branch [default: autocommit]")
+    subparsers = parser.add_subparsers(help="subcommands")
+
+    watch_parser = subparsers.add_parser('watch', help='watch repository for changes and commit them [default]')
+    watch_parser.set_defaults(func=watch)
+
+    merge_parser = subparsers.add_parser('merge', help='merge automatic commits back into normal branch')
+    merge_parser.add_argument("-b", "--branch", type=str, default='master',
+                              help="merge to this branch [default: master]")
+    merge_parser.add_argument("-m", "--message", type=str, default='',
+                              help="summary message []")
+    merge_parser.set_defaults(func=merge)
+
+    set_default_subparser(parser, 'watch')
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == '__main__':
+    main()
