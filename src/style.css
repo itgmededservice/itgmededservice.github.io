@@ -121,3 +121,13 @@ col-info {
     background: white;
     vertical-align: middle;
 }
+
+li{
+    margin-left: 50px;
+    list-style-type: none;
+}
+
+li > a{
+    color: #f2f2f2;
+    font-size: 40px;
+}
