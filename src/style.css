@@ -122,12 +122,12 @@ col-info {
     vertical-align: middle;
 }
 
-li{
+ul{
     margin-left: 50px;
     list-style-type: none;
 }
 
-li > a{
+a{
     color: #f2f2f2;
     font-size: 40px;
 }
