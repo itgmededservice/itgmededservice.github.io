@@ -82,8 +82,8 @@ nav {
     border-right: 4px solid #2c3e50;
 }
 
-col-info {
-    width: 65%;
+.col-info {
+    width: 64%;
     height: 120px;
     display: block;
     float: left;
@@ -119,7 +119,6 @@ col-info {
     width: 600px;
     height: 400px;
     background: white;
-    vertical-align: middle;
 }
 
 ul{
@@ -129,5 +128,10 @@ ul{
 
 a{
     color: #f2f2f2;
-    font-size: 35px;
+    font-size: 40px;
+}
+
+.highlight{
+    background-color: #f2f2f2;
+    color: #34495e;
 }

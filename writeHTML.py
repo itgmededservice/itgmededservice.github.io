@@ -14,7 +14,7 @@ def writeToHTML(room, data):
                     'Classrom 10', 'Classrom 3056', 'Colloquium 3070',
                     'Conference 3131','Conference A1000','Conference B1034',
                     'Nelson Auditorium','Patio','Tamkin F108','Tamkin F110',
-                    'Tamkin F114','Telemedicine Theater','UCIMC Room 2112',
+                    'Tamkin F114','Telemedicine_Theater','UCIMC Room 2112',
                     'Med Surge II']
     img = '<img src="src/gif.gif" alt="Have a Good Day!" class="center">' if not bool(data) else ''
     fileName = room + '.html'
@@ -33,7 +33,8 @@ def writeToHTML(room, data):
             <meta name='description' content='EMS Schedule'>
             <meta name='author' content='MedEdIT'>
             <meta name='keywords' content='EMS Schedule Display'>
-
+            <meta http-equiv="refresh" content="600">
+            
             <title>EMS Schedule</title>
 
             <link rel='stylesheet' href='src/style.css' type='text/css'>
@@ -42,34 +43,12 @@ def writeToHTML(room, data):
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.0.0/jquery.json2html.min.js"></script>
-
+            <script src="src/script.js" type="text/javascript"></script>    
             <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
-			
-			<script>
-				$(document).ready(function () {{
-					var days = [
-					'Sunday',
-					'Monday',
-					'Tuesday',
-					'Wednesday',
-					'Thursday',
-					'Friday',
-					'Saturday'];
-					
-					var months = ["January", "February", "March", "April", "May", "June",
-							   "July", "August", "September", "October", "November", "December"];
-					
-					var currentdate = new Date();
-					var datetime = days[currentdate.getDay()] + ", " + 
-						months[currentdate.getMonth()] + " " + currentdate.getDate() + ", " +
-						currentdate.getFullYear();
-					$('#date').text(datetime)
-				}});
-			</script>
 			
             <nav>
                 <div id="logo"> <img src="src/UCI-School-of-Medicine.jpg" alt="UCI MEDED"></div>
-                <div id="room-name"> {0} </div>
+                <div id="room-name">{0}</div>
                 <div id="date">Wed Feb 21 2018</div>
             </nav>
             <script>
