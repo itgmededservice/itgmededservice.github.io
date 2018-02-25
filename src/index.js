@@ -18,7 +18,7 @@ $(document).ready(function () {
     ];
 
 
-    var link = 'https://itgmededservice.github.io/schedule/';
+    var link = 'https://itgmededservice.github.io/';
     var extension = '';
 
     for (var i = 0; i < l.length; ++i) {
