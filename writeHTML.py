@@ -40,10 +40,9 @@ def writeToHTML(room, data):
             <link rel='stylesheet' href='src/style.css' type='text/css'>
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="src/script.js" type="text/javascript"><script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.0.0/jquery.json2html.min.js"></script>
-            <script src="src/script.js" type="text/javascript"></script>    
+            <script src="src/script.js" type="text/javascript"></script>
 			
             <nav>
                 <div id="logo"> <img src="src/UCI-School-of-Medicine.jpg" alt="UCI MEDED"></div>
