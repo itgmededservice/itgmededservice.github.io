@@ -47,8 +47,12 @@
                             },
                             {
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${eventName}"
+                                "class": "col-info",
+                                "html":[{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${eventName}"
+                                }]
                             }
                         ]
                     }]
@@ -64,7 +68,7 @@
                     }
                 };
 
-                var d = [{'startTime': '8:00 AM', 'endTime': '9:00 AM', 'eventName': 'P & H Meeting', 'client': 'SOM Medical Education - Conference A1000'}, {'startTime': '9:00 AM', 'endTime': '10:00 AM', 'eventName': 'P&H', 'client': 'SOM Medical Education - Conference A1000'}, {'startTime': '10:00 AM', 'endTime': '12:00 PM', 'eventName': 'Dir for CSA', 'client': 'SOM Medical Education - Conference A1000'}, {'startTime': '12:15 PM', 'endTime': '12:45 PM', 'eventName': 'PRIME-LC', 'client': 'SOM Medical Education - Conference A1000'}, {'startTime': '1:00 PM', 'endTime': '3:00 PM', 'eventName': 'SAD & MEDC mtgs', 'client': 'SOM Medical Education - Conference A1000'}, {'startTime': '3:00 PM', 'endTime': '5:00 PM', 'eventName': 'Admissions Interviews', 'client': 'SOM Medical Education - Conference A1000'}];
+                var d = [{'startTime': '8:00 AM', 'endTime': '9:00 AM', 'eventName': 'P & H Meeting', 'client': 'Medical Education'}, {'startTime': '9:00 AM', 'endTime': '10:00 AM', 'eventName': 'P&H', 'client': 'Medical Education'}, {'startTime': '10:00 AM', 'endTime': '12:00 PM', 'eventName': 'Dir for CSA', 'client': 'Medical Education'}, {'startTime': '12:15 PM', 'endTime': '12:45 PM', 'eventName': 'PRIME-LC', 'client': 'Medical Education'}, {'startTime': '1:00 PM', 'endTime': '3:00 PM', 'eventName': 'SAD & MEDC mtgs', 'client': 'Medical Education'}, {'startTime': '3:00 PM', 'endTime': '5:00 PM', 'eventName': 'Admissions Interviews', 'client': 'Medical Education'}];
 
                 document.write(json2html.transform({}, main.list));
             </script>

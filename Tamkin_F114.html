@@ -47,8 +47,12 @@
                             },
                             {
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${eventName}"
+                                "class": "col-info",
+                                "html":[{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${eventName}"
+                                }]
                             }
                         ]
                     }]
@@ -64,7 +68,7 @@
                     }
                 };
 
-                var d = [{'startTime': '9:00 AM', 'endTime': '12:00 PM', 'eventName': 'Public Health 194 / 196B-C', 'client': 'College of Health Sciences - Tamkin: F114'}, {'startTime': '12:00 PM', 'endTime': '4:00 PM', 'eventName': 'NS 125: Research Methods', 'client': 'College of Health Sciences - Tamkin: F114'}];
+                var d = [{'startTime': '9:00 AM', 'endTime': '12:00 PM', 'eventName': 'Public Health 194 / 196B-C', 'client': 'Medical Education'}, {'startTime': '12:00 PM', 'endTime': '4:00 PM', 'eventName': 'NS 125: Research Methods', 'client': 'Nursing Science, Department'}];
 
                 document.write(json2html.transform({}, main.list));
             </script>

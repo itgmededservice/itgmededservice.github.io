@@ -73,8 +73,12 @@ def writeToHTML(room, data):
                             }},
                             {{
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${{eventName}}"
+                                "class": "col-info",
+                                "html":[{{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${{eventName}}"
+                                }}]
                             }}
                         ]
                     }}]

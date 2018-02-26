@@ -47,8 +47,12 @@
                             },
                             {
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${eventName}"
+                                "class": "col-info",
+                                "html":[{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${eventName}"
+                                }]
                             }
                         ]
                     }]
@@ -64,7 +68,7 @@
                     }
                 };
 
-                var d = [{'startTime': '8:00 AM', 'endTime': '12:00 PM', 'eventName': 'MS2 Curriculum', 'client': 'College of Health Sciences - Nelson Auditorium'}];
+                var d = [{'startTime': '8:00 AM', 'endTime': '12:00 PM', 'eventName': 'MS2 Curriculum', 'client': 'Medical Education'}];
 
                 document.write(json2html.transform({}, main.list));
             </script>

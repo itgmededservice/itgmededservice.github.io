@@ -47,8 +47,12 @@
                             },
                             {
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${eventName}"
+                                "class": "col-info",
+                                "html":[{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${eventName}"
+                                }]
                             }
                         ]
                     }]
@@ -64,7 +68,7 @@
                     }
                 };
 
-                var d = [{'startTime': '7:00 AM', 'endTime': '5:30 PM', 'eventName': 'SOM Interviews', 'client': 'SOM Medical Education - Conference B1034'}];
+                var d = [{'startTime': '7:00 AM', 'endTime': '5:30 PM', 'eventName': 'SOM Interviews', 'client': 'Medical Education'}];
 
                 document.write(json2html.transform({}, main.list));
             </script>

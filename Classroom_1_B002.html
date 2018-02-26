@@ -47,8 +47,12 @@
                             },
                             {
                                 "<>": "div",
-                                "class": "col-info row-event",
-                                "html": "${eventName}"
+                                "class": "col-info",
+                                "html":[{
+                                "<>":"div",
+                                "class":"row-event",
+                                "html":"${eventName}"
+                                }]
                             }
                         ]
                     }]
@@ -64,7 +68,7 @@
                     }
                 };
 
-                var d = [{'startTime': '12:00 PM', 'endTime': '1:00 PM', 'eventName': 'Selye Society', 'client': 'SOM Medical Education - Classroom 1 B002'}];
+                var d = [{'startTime': '12:00 PM', 'endTime': '1:00 PM', 'eventName': 'Selye Society', 'client': 'Medical Education'}];
 
                 document.write(json2html.transform({}, main.list));
             </script>

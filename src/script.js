@@ -37,8 +37,8 @@ $(document).ready(function () {
     var check = false;
 
     var dt = new Date();
-    var hour = 21;
-    var minute = 30;
+    var hour = dt.getHours();
+    var minute = dt.getMinutes();
     var time = (hour == 0 ? 24 : hour) * 60 + minute; //time in minute
 
     //Get list of all elements have class = "row"
@@ -64,10 +64,10 @@ $(document).ready(function () {
 
             //not the first booking of the day
             if (i != 0) {
-                currStartTime = timeToMinute((l[i].querySelector(".col-time .start-time")).textContent);
-                currEndTime = timeToMinute((l[i].querySelector(".col-time .end-time")).textContent);
-                prevStartTime = timeToMinute((l[i - 1].querySelector(".col-time .start-time")).textContent);
-                prevEndTime = timeToMinute((l[i - 1].querySelector(".col-time .end-time")).textContent);
+                var currStartTime = timeToMinute((l[i].querySelector(".col-time .start-time")).textContent);
+                var currEndTime = timeToMinute((l[i].querySelector(".col-time .end-time")).textContent);
+                var prevStartTime = timeToMinute((l[i - 1].querySelector(".col-time .start-time")).textContent);
+                var prevEndTime = timeToMinute((l[i - 1].querySelector(".col-time .end-time")).textContent);
 
                 if (currStartTime == prevEndTime && time == currStartTime)
                     check = true;

@@ -70,7 +70,7 @@ def getData(browser, buildingName):
             startTime = obj[0].text
             endTime = obj[1].text
             eventName = obj[2].text
-            client = obj[3].text
+            client = obj[4].text
             info = {'startTime':startTime,
                     'endTime':endTime,
                     'eventName':eventName,
@@ -106,12 +106,12 @@ if __name__== '__main__':
 
     getData(browser, 'SOM Medical Education')
     getData(browser, 'College of Health Sciences')
-    print('++++DONE++++')
 
     #close the browser window
     browser.quit()
 
     #commit to git
+    print("Commit to GIT")
     temp=time.localtime(time.time())
     uploaddate= str(temp[0])+'_'+str(temp[1])+'_'+str(temp[2])+'_'+str(temp[3])+'_'+str(temp[4])
 
@@ -119,3 +119,4 @@ if __name__== '__main__':
     gitpy.gitAdd('.',repoDir )
     gitpy.gitCommit(uploaddate, repoDir)
     gitpy.gitPush(repoDir)
+    print('++++DONE++++')
