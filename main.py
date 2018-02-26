@@ -115,7 +115,7 @@ if __name__== '__main__':
     temp=time.localtime(time.time())
     uploaddate= str(temp[0])+'_'+str(temp[1])+'_'+str(temp[2])+'_'+str(temp[3])+'_'+str(temp[4])
 
-    repoDir='C:\\Users\\khadb\\Desktop\\itgmededservice.github.io'
+    repoDir='C:\\Users\ITGAdmin\\Documents\\itgmededservice.github.io'
     gitpy.gitAdd('.',repoDir )
     gitpy.gitCommit(uploaddate, repoDir)
     gitpy.gitPush(repoDir)
