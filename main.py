@@ -106,12 +106,12 @@ if __name__== '__main__':
 
     getData(browser, 'SOM Medical Education')
     getData(browser, 'College of Health Sciences')
+    print('++++DONE++++')
 
     #close the browser window
     browser.quit()
 
     #commit to git
-    print("...COMMIT TO GIT...");
     temp=time.localtime(time.time())
     uploaddate= str(temp[0])+'_'+str(temp[1])+'_'+str(temp[2])+'_'+str(temp[3])+'_'+str(temp[4])
 
@@ -119,4 +119,3 @@ if __name__== '__main__':
     gitpy.gitAdd('.',repoDir )
     gitpy.gitCommit(uploaddate, repoDir)
     gitpy.gitPush(repoDir)
-    print('++++DONE++++')
