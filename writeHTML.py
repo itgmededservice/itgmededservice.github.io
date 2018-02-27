@@ -14,7 +14,7 @@ def writeToHTML(room, data):
                     'Classrom 10', 'Classrom 3056', 'Colloquium 3070',
                     'Conference 3131','Conference A1000','Conference B1034',
                     'Nelson Auditorium','Patio','Tamkin F108','Tamkin F110',
-                    'Tamkin F114','Telemedicine_Theater','UCIMC Room 2112',
+                    'Tamkin F114','Telemedicine Theater','UCIMC Room 2112',
                     'Med Surge II']
     img = '<img src="src/gif.gif" alt="Have a Good Day!" class="center">' if not bool(data) else ''
     fileName = room + '.html'
