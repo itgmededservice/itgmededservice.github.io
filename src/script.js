@@ -35,6 +35,7 @@ $(document).ready(function () {
     };
 
     var check = false;
+    var i = 0;
 
     var dt = new Date();
     var hour = dt.getHours();
@@ -48,13 +49,13 @@ $(document).ready(function () {
     //Not empy
     if (len != 0) {
         //Case 1 element
+
         if (len == 1 && (time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent)) &&
             time <= timeToMinute((l[0].querySelector(".col-time .end-time")).textContent))
             check = true;
         else {
-            var i = 0;
+     
             var stop = false;
-
             //Loop till find later time
             do {
                 if (time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
@@ -81,9 +82,8 @@ $(document).ready(function () {
                     }
                 }
             }
-
-            if (check)
-                l[i].classList.add("highlight");
         }
     }
+    if (check)
+        l[i].classList.add("highlight");
 });
