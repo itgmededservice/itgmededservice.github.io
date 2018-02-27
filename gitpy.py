@@ -16,7 +16,7 @@ def gitCommit(commitMessage, repoDir):
     pipe.wait()
     return 
 def gitPush(repoDir):
-    cmd = 'git push '
+    cmd = 'git push --force'
     pipe = subprocess.Popen(cmd, shell=True, cwd=repoDir,stdout = subprocess.PIPE,stderr = subprocess.PIPE )
     (out, error) = pipe.communicate()
     pipe.wait()
