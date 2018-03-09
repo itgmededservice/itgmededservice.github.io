@@ -8,7 +8,7 @@
             <meta name='author' content='MedEdIT'>
             <meta name='keywords' content='EMS Schedule Display'>
             <meta http-equiv="refresh" content="600">
-            
+
             <title>EMS Schedule</title>
 
             <link rel='stylesheet' href='src/style.css' type='text/css'>
@@ -17,7 +17,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.0.0/jquery.json2html.min.js"></script>
             <script src="src/script.js" type="text/javascript"></script>
-			
+
             <nav>
                 <div id="logo"> <img src="src/UCI-School-of-Medicine.jpg" alt="UCI MEDED"></div>
                 <div id="room-name">Classrom 8</div>
@@ -60,7 +60,7 @@
                     "list": {
                         "<>": "div",
                         "id": "container",
-                        "html": function() { 
+                        "html": function() {
                             return (json2html.transform(d, t.item))
                         }
                     }
@@ -74,7 +74,9 @@
         </head>
 
         <body>
-            <img src="src/gif.gif" alt="Have a Good Day!" class="center">
+            <H4 style="font-size: 40px; color: white; text-align:center; margin-top: 250px;">ROOM HAS NOT BEEN RESERVED </H4>
+	    <H4 style="font-size: 40px; color: white; text-align:center; margin-top: 30px;">
+	    Visit <a href="#">http://vems.oit.uci.edu/MedicalEducation/</a> to make your reservation</H4>
         </body>
 
         </html>

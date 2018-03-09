@@ -47,24 +47,26 @@ $(document).ready(function () {
     var len = l.length;
 
     //Not empy
-    if (len != 0) {
-        //Case 1 element
-
+    if (len > 0) {
+        //Case 1 booking
         if (len == 1 && (time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent)) &&
             time <= timeToMinute((l[0].querySelector(".col-time .end-time")).textContent))
             check = true;
         else {
      
             var stop = false;
-            //Loop till find later time
+            //Loop till find the time needed
             do {
                 if (time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
                     stop = true;
-                ++i;
+                else
+					++i;
             } while (i < len && !stop);
 
-            //not the first booking of the day
-            if (i != 0) {
+            //first booking of the day
+			if (i == 0 && time == timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
+				check = true;
+            else if (i > 0){ //not the first booking of the day
                 var currStartTime = timeToMinute((l[i].querySelector(".col-time .start-time")).textContent);
                 var currEndTime = timeToMinute((l[i].querySelector(".col-time .end-time")).textContent);
                 var prevStartTime = timeToMinute((l[i - 1].querySelector(".col-time .start-time")).textContent);

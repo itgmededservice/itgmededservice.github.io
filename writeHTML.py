@@ -16,7 +16,9 @@ def writeToHTML(room, data):
                     'Nelson Auditorium','Patio','Tamkin F108','Tamkin F110',
                     'Tamkin F114','Telemedicine Theater','UCIMC Room 2112',
                     'Med Surge II']
-    img = '<img src="src/gif.gif" alt="Have a Good Day!" class="center">' if not bool(data) else ''
+    availableCheck = '''<H4 style="font-size: 40px; color: white; text-align:center; margin-top: 250px;">ROOM HAS NOT BEEN RESERVED </H4>
+	    <H4 style="font-size: 40px; color: white; text-align:center; margin-top: 30px;">
+	    Visit <a href="#">http://vems.oit.uci.edu/MedicalEducation/</a> to make your reservation</H4>''' if not bool(data) else ''
     fileName = room + '.html'
     roomName = ''
     for i,r in enumerate(l):
@@ -34,7 +36,7 @@ def writeToHTML(room, data):
             <meta name='author' content='MedEdIT'>
             <meta name='keywords' content='EMS Schedule Display'>
             <meta http-equiv="refresh" content="600">
-            
+
             <title>EMS Schedule</title>
 
             <link rel='stylesheet' href='src/style.css' type='text/css'>
@@ -43,7 +45,7 @@ def writeToHTML(room, data):
             <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.0.0/jquery.json2html.min.js"></script>
             <script src="src/script.js" type="text/javascript"></script>
-			
+
             <nav>
                 <div id="logo"> <img src="src/UCI-School-of-Medicine.jpg" alt="UCI MEDED"></div>
                 <div id="room-name">{0}</div>
@@ -86,7 +88,7 @@ def writeToHTML(room, data):
                     "list": {{
                         "<>": "div",
                         "id": "container",
-                        "html": function() {{ 
+                        "html": function() {{
                             return (json2html.transform(d, t.item))
                         }}
                     }}
@@ -103,7 +105,7 @@ def writeToHTML(room, data):
             {2}
         </body>
 
-        </html>'''.format(roomName, data, img)
+        </html>'''.format(roomName, data, availableCheck)
 
     html_file = open(fileName, 'w')
     html_file.write(html_str)
