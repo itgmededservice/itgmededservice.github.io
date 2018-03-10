@@ -29,7 +29,7 @@ $(document).ready(function () {
         var hour = parseInt(str.substring(0, str.search(":")));
         var minute = parseInt(str.substring(str.search(":") + 1, str.search(" ")));
         var ampm = str.substring(str.search(" ") + 1, str.length);
-        var offset = ampm == "AM" ? 0 : 12;
+        var offset = ampm == "AM" || (hour == 12 && ampm == "PM") ? 0 : 12;
 
         return (hour + offset) * 60 + minute;
     };
