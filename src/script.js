@@ -41,7 +41,7 @@ $(document).ready(function () {
         return (hour + offset) * 60 + minute;
     };
 
-    var check = false;
+    var found = false;
     var i = 0;
 
     var dt = new Date();
@@ -55,47 +55,15 @@ $(document).ready(function () {
 
     //Not empty
     if (len > 0) {
-        //Case 1 booking
-        if (len == 1){
-			if(time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent) &&
-            time <= timeToMinute((l[0].querySelector(".col-time .end-time")).textContent))
-				check = true;
-		}
-        else {
-            var stop = false;
             //Loop till find the time needed
             do {
-                if (time <= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
-                    stop = true;
+                if (time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent) &&
+					time <= timeToMinute((l[i].querySelector(".col-time .end-time")).textContent))
+                    found = true;
                 else
 					++i;
-            } while (i < len && !stop);
-
-            //first booking of the day
-			if (i == 0){
-				if(time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
-				check = true;
-			}
-            else{ //not the first booking of the day
-                var currStartTime = timeToMinute((l[i].querySelector(".col-time .start-time")).textContent);
-                var currEndTime = timeToMinute((l[i].querySelector(".col-time .end-time")).textContent);
-                var prevStartTime = timeToMinute((l[i - 1].querySelector(".col-time .start-time")).textContent);
-                var prevEndTime = timeToMinute((l[i - 1].querySelector(".col-time .end-time")).textContent);
-
-                if (currStartTime == prevEndTime && time == currStartTime)
-                    check = true;
-                else if (!(time < currStartTime && time > prevEndTime)) {
-                    if (i == len - 1 && time <= currEndTime)
-                        check = true;
-
-                    if (time >= prevStartTime && time <= prevEndTime) {
-                        --i;
-                        check = true;
-                    }
-                }
-            }
-        }
+            } while (i < len && !found);
     }
-    if (check)
+    if (found)
         l[i].classList.add("highlight");
 });
