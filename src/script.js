@@ -49,9 +49,10 @@ $(document).ready(function () {
     //Not empy
     if (len > 0) {
         //Case 1 booking
-        if (len == 1 && (time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent)) &&
+        if (len == 1)
+			if(time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent) &&
             time <= timeToMinute((l[0].querySelector(".col-time .end-time")).textContent))
-            check = true;
+				check = true;
         else {
      
             var stop = false;
