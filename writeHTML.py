@@ -35,7 +35,7 @@ def writeToHTML(room, data):
             <meta name='description' content='EMS Schedule'>
             <meta name='author' content='MedEdIT'>
             <meta name='keywords' content='EMS Schedule Display'>
-            <meta http-equiv="refresh" content="600">
+            <meta http-equiv="refresh" content="300">
 
             <title>EMS Schedule</title>
 

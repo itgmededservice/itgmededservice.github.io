@@ -29,7 +29,14 @@ $(document).ready(function () {
         var hour = parseInt(str.substring(0, str.search(":")));
         var minute = parseInt(str.substring(str.search(":") + 1, str.search(" ")));
         var ampm = str.substring(str.search(" ") + 1, str.length);
-        var offset = ampm == "AM" || (hour == 12 && ampm == "PM") ? 0 : 12;
+        var offset = 0;
+			
+		if (ampm == "AM" && hour == 0)
+				offset = 24;
+		else if (ampm == "PM"){
+			if (!(hour == 12))
+				offset = 12;
+		}
 
         return (hour + offset) * 60 + minute;
     };
@@ -46,28 +53,30 @@ $(document).ready(function () {
     var l = document.getElementsByClassName("row");
     var len = l.length;
 
-    //Not empy
+    //Not empty
     if (len > 0) {
         //Case 1 booking
-        if (len == 1)
+        if (len == 1){
 			if(time >= timeToMinute((l[0].querySelector(".col-time .start-time")).textContent) &&
             time <= timeToMinute((l[0].querySelector(".col-time .end-time")).textContent))
 				check = true;
+		}
         else {
-     
             var stop = false;
             //Loop till find the time needed
             do {
-                if (time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
+                if (time <= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
                     stop = true;
                 else
 					++i;
             } while (i < len && !stop);
 
             //first booking of the day
-			if (i == 0 && time == timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
+			if (i == 0){
+				if(time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent))
 				check = true;
-            else if (i > 0){ //not the first booking of the day
+			}
+            else{ //not the first booking of the day
                 var currStartTime = timeToMinute((l[i].querySelector(".col-time .start-time")).textContent);
                 var currEndTime = timeToMinute((l[i].querySelector(".col-time .end-time")).textContent);
                 var prevStartTime = timeToMinute((l[i - 1].querySelector(".col-time .start-time")).textContent);
