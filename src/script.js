@@ -41,9 +41,7 @@ $(document).ready(function () {
         return (hour + offset) * 60 + minute;
     };
 
-    var found = false;
-    var i = 0;
-
+  
     var dt = new Date();
     var hour = dt.getHours();
     var minute = dt.getMinutes();
@@ -55,6 +53,10 @@ $(document).ready(function () {
 
     //Not empty
     if (len > 0) {
+		
+		var found = false;
+		var i = 0;
+
             //Loop till find the time needed
             do {
                 if (time >= timeToMinute((l[i].querySelector(".col-time .start-time")).textContent) &&
@@ -63,7 +65,8 @@ $(document).ready(function () {
                 else
 					++i;
             } while (i < len && !found);
+			
+		if (found)
+			l[i].classList.add("highlight");
     }
-    if (found)
-        l[i].classList.add("highlight");
 });
