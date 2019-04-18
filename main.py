@@ -91,27 +91,27 @@ def getData(browser, buildingName):
         browser.find_element_by_id('ctl00_pc_FilterViewButton').click()
 
 if __name__== '__main__':
-##    options = Options()
-##    options.add_argument("--disable-infobars")
-##    browser = webdriver.Chrome(chrome_options=options)
-##    url = 'http://vems.oit.uci.edu/MedicalEducation/BrowseEvents.aspx'
-##    browser.get(url)
-##
-####    #Select view as Monthly List
-####    browser.find_element_by_id('tab2-tab').click()
-####    #Select view By Location
-####    browser.find_element_by_xpath('//*[@id="groupByOptions"]/label[2]').click()
-##    
-##    #Select Filter
-##    browser.find_element_by_id("ctl00_pc_FilterViewButton").click()
-##
-##    time.sleep(2) #time
-##
-##    getData(browser, 'SOM Medical Education')
-##    getData(browser, 'College of Health Sciences')
-##
-##    #close the browser window
-##    browser.quit()
+    options = Options()
+    options.add_argument("--disable-infobars")
+    browser = webdriver.Chrome(chrome_options=options)
+    url = 'http://vems.oit.uci.edu/MedicalEducation/BrowseEvents.aspx'
+    browser.get(url)
+
+##    #Select view as Monthly List
+##    browser.find_element_by_id('tab2-tab').click()
+##    #Select view By Location
+##    browser.find_element_by_xpath('//*[@id="groupByOptions"]/label[2]').click()
+    
+    #Select Filter
+    browser.find_element_by_id("ctl00_pc_FilterViewButton").click()
+
+    time.sleep(2) #time
+
+    getData(browser, 'SOM Medical Education')
+    getData(browser, 'College of Health Sciences')
+
+    #close the browser window
+    browser.quit()
 
     #commit to git
     print("Commit to GIT")
