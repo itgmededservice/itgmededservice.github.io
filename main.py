@@ -71,8 +71,10 @@ def getData(browser, buildingName):
             startTime = obj[0].text
             endTime = obj[1].text
             eventName = obj[2].text
-			#if roomName == "Conference A1000":
-			#	eventName = "Conference Meeting"
+
+            if roomName == 'Conference A1000':
+                eventName = 'RESERVED'
+				
             client = obj[4].text
             info = {'startTime':startTime,
                     'endTime':endTime,
