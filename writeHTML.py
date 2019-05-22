@@ -8,14 +8,14 @@ def writeToHTML(room, data):
                     'Conference_A1000','Conference_B1034','Nelson_Auditorium',
                     'Patio','Tamkin_F108','Tamkin_F110','Tamkin_F114',
                     'Telemedicine_Theater_B001','UCIMC_B22A_Room_2112_',
-                    'Med_Surge_II_Multi-Labs_A_B_C']
+                    'Med_Surge_II_Multi-Labs_A_B_C','Conference_C1132']
     roomList = ['Classrom 1', 'Classrom 2', 'Classrom 3', 'Classrom 4',
                     'Classrom 5', 'Classrom 6', 'Classrom 7', 'Classrom 8',
                     'Classrom 10', 'Classrom 3056', 'Colloquium 3070',
                     'Conference 3131','Conference A1000','Conference B1034',
                     'Nelson Auditorium','Patio','Tamkin F108','Tamkin F110',
                     'Tamkin F114','Telemedicine Theater','UCIMC Room 2112',
-                    'Med Surge II']
+                    'Med Surge II','Conference C1132']
     availableCheck = '''<H4 style="font-size: 40px; color: white; text-align:center; margin-top: 250px;">ROOM HAS NOT BEEN RESERVED </H4>
 	    <H4 style="font-size: 40px; color: white; text-align:center; margin-top: 30px;">
 	    Visit <a href="#">http://vems.oit.uci.edu/MedicalEducation/</a> to make your reservation</H4>''' if not bool(data) else ''
