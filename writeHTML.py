@@ -27,7 +27,7 @@ def writeToHTML(room, data):
             break
 
     html_str = '''<!DOCTYPE HTML>
-        <html lang='eng'>
+        <html lang='eng' oncontextmenu="return false;">
 
         <head>
             <meta charset='UTF-8'>
