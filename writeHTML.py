@@ -9,9 +9,9 @@ def writeToHTML(room, data):
                     'Patio','Tamkin_F108','Tamkin_F110','Tamkin_F114',
                     'Telemedicine_Theater_B001','UCIMC_B22A_Room_2112_',
                     'Med_Surge_II_Multi-Labs_A_B_C','Conference_C1132']
-    roomList = ['Classrom 1', 'Classrom 2', 'Classrom 3', 'Classrom 4',
-                    'Classrom 5', 'Classrom 6', 'Classrom 7', 'Classrom 8',
-                    'Classrom 10', 'Classrom 3056', 'Colloquium 3070',
+    roomList = ['Classroom 1', 'Classroom 2', 'Classroom 3', 'Classroom 4',
+                    'Classroom 5', 'Classroom 6', 'Classroom 7', 'Classroom 8',
+                    'Classroom 10', 'Classroom 3056', 'Colloquium 3070',
                     'Conference 3131','Conference A1000','Conference B1034',
                     'Nelson Auditorium','Patio','Tamkin F108','Tamkin F110',
                     'Tamkin F114','Telemedicine Theater','UCIMC Room 2112',
